@@ -5,11 +5,15 @@ bash multipass-setup.sh
 multipass shell ubuntu-multipass
 
 ## create 2 worker node kind cluster with a feature gate enabled
-time kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --wait 5m
+time kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m
 
 ## view cluster status
 kubectl get no
 kubectl get po -A
+
+## try to deploy old deployment spec
+kubectl apply -f multipass-example-deploy.yaml
+kubectl convert -f multipass-example-deploy.yaml | kubectl apply -f -
 
 ## deploy a minimal pod
 kubectl apply -f ~/multipass-example-pod.yaml && kubectl wait --for=condition=ready --timeout=30s pod/example-pod
@@ -26,7 +30,7 @@ exit
 kubectl replace --raw /api/v1/namespaces/default/pods/example-pod/ephemeralcontainers -f ~/multipass-example-debug.json
 
 ## check state of the add'l container
-kubectl get pods example-pod -o jsonpath="{.status.ephemeralContainerStatuses[0].state}"
+watch kubectl get pods example-pod -o jsonpath="{.status.ephemeralContainerStatuses[0].state}" && echo
 kubectl describe po example-pod
 
 ## once running, attach to pod via add'l container and see debug utils
