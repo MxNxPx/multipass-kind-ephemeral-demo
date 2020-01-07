@@ -35,7 +35,6 @@ curl
 tcpdump
 openssl
 file
-ls -l /bin
 exit
 
 ## notice ephemeral container is gone and can no longer be attached
