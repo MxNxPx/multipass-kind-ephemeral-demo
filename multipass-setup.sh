@@ -36,8 +36,10 @@ EOF
 ## launch multipass
 multipass launch ubuntu --name $NAME --cpus $CPU --mem $MEM --disk $DISK
 sleep 10
-multipass list | egrep "^ubuntu-multipass" | grep Running
-if [ $? -ne 0 ]; then 
+multipass list | egrep "^ubuntu-multipass.*Running.*([0-9]{1,3}[\.]){3}[0-9]{1,3}"
+if [ $? -ne 0 ]; then
+   echo "[!] multipass instance failed to create, run command below and try again:"
+   echo "    #  multipass delete ubuntu-multipass && multipass purge"
    exit 1
 fi
 
