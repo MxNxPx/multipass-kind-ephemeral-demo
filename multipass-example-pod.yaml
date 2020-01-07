@@ -3,6 +3,7 @@ kind: Pod
 metadata:
   name: example-pod
 spec:
+  shareProcessNamespace: true
   containers:
   - image: nginx:alpine
     name: app
