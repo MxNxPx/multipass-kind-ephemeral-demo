@@ -9,6 +9,7 @@ unset PROXY HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
 
 ## install commands here
 cat <<'EOF' > multipass-commands.txt
+echo "[*] `date` -- STARTING..."
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common jq git wget
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -30,7 +31,6 @@ tar -xf go1.13.linux-amd64.tar.gz
 sudo chown -R root:root ./go
 sudo mv go /usr/local
 GO111MODULE="on" /usr/local/go/bin/go get sigs.k8s.io/kind@v0.6.1
-echo "done"
 EOF
 
 ## launch multipass
@@ -44,10 +44,12 @@ fi
 ## loop thru commands
 OLDIFS=$IFS
 IFS=$'\n'
+echo "[*] `date` -- RUNNING THRU INSTALLS ..."
 for line in $(cat multipass-commands.txt); do
-  echo $line
+  echo "[*] $line"
   multipass exec $NAME -- bash -c ''"$line"''
 done
+echo "[*] `date` -- DONE WITH INSTALLS ..."
 IFS=$OLDIFS
 rm multipass-commands.txt
 
