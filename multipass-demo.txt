@@ -41,5 +41,8 @@ exit
 kubectl describe po example-pod
 kubectl attach -it example-pod -c debugger
 
+## exit multipass shell
+exit
+
 ## cleanup
 multipass delete ubuntu-multipass && multipass purge
