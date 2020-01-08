@@ -5,7 +5,9 @@ bash multipass-setup.sh
 multipass shell ubuntu-multipass
 
 ## create 2 worker node kind cluster with a feature gate enabled
+docker ps
 time kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m
+docker ps
 
 ## view cluster status
 kubectl get no
@@ -39,6 +41,8 @@ curl
 tcpdump
 openssl
 file
+tcpdump -i any -c20 -nn -vv
+kubectl run -i --rm --restart=Never minideb-extras --image=bitnami/minideb-extras -- sh -c "curl -vvv http://$(kubectl get po example-pod -o jsonpath='{.status.podIP}')"
 exit
 
 ## notice ephemeral container is gone and can no longer be attached
