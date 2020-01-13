@@ -1,7 +1,7 @@
 #!/bin/bash
 NAME=ubuntu-multipass
 CPU=4
-MEM=6G
+MEM=4G
 DISK=10G
 
 ## unset any proxy env vars
