@@ -6,7 +6,7 @@ multipass shell ubuntu-multipass
 
 ## create 2 worker node kind cluster with a feature gate enabled
 docker ps
-time kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m
+time (kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m && kubectl wait --timeout=5m --for=condition=Ready nodes --all)
 docker ps
 
 ## view cluster status
