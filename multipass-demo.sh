@@ -17,6 +17,7 @@ pe "docker ps"
 TYPE_SPEED=300
 PROMPT_TIMEOUT=0
 pe "cat ~/multipass-kind-2worker-ephemeral-config.yaml"
+p "[.] https://kind.sigs.k8s.io/docs/design/initial/#overview"
 pe "time (kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m && kubectl wait --timeout=5m --for=condition=Ready nodes --all)"
 TYPE_SPEED=20
 PROMPT_TIMEOUT=0.1
@@ -90,6 +91,7 @@ pe "kubectl describe po example-pod"
 pe "kubectl attach -it example-pod -c debugger"
 
 echo;echo
+PROMPT_TIMEOUT=0.1
 MSG="DEMO COMPLETE!"
 COW="/usr/share/cowsay/cows/sheep.cow"
 pe "echo \$MSG | cowsay -f \$COW"
