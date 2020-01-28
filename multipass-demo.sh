@@ -16,6 +16,7 @@ pe "kubectl cluster-info"
 pe "docker ps"
 TYPE_SPEED=300
 PROMPT_TIMEOUT=0
+pe "cat ~/multipass-kind-2worker-ephemeral-config.yaml"
 pe "time (kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m && kubectl wait --timeout=5m --for=condition=Ready nodes --all)"
 TYPE_SPEED=20
 PROMPT_TIMEOUT=0.1
@@ -52,7 +53,6 @@ pe "kubectl apply -f ~/multipass-example-pod.yaml && kubectl wait --for=conditio
 ## jump into the pod and see what limited utilities are present
 p "[?] will this pod have what i need to troubleshoot: curl openssl file tcpdump?"
 TYPE_SPEED=20
-PROMPT_TIMEOUT=0
 pe "kubectl exec -it example-pod sh"
 
 ## inject the ephemeral container
