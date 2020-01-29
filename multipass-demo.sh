@@ -62,6 +62,7 @@ pe "kubectl exec -it example-pod sh"
 
 ## inject the ephemeral container
 TYPE_SPEED=300
+PROMPT_TIMEOUT=0.1
 pe "cat ~/multipass-example-debug.json"
 pe "kubectl replace --raw /api/v1/namespaces/default/pods/example-pod/ephemeralcontainers -f ~/multipass-example-debug.json"
 
