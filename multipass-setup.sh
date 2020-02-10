@@ -30,6 +30,7 @@ tar -xf go1.13.linux-amd64.tar.gz
 sudo chown -R root:root ./go
 sudo mv go /usr/local
 GO111MODULE="on" /usr/local/go/bin/go get sigs.k8s.io/kind@v0.6.1
+echo -e "PS1=\"$ \"" >> ~/.bashrc
 echo -e "setw -g mode-keys vi\nset -g mouse on" >> ~/.tmux.conf
 EOF
 
