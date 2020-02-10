@@ -10,7 +10,7 @@ unset PROXY HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
 ## install commands here
 cat <<'EOF' > multipass-commands.txt
 sudo apt-get update -y
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common jq git wget pv cowsay
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common jq git wget tmux pv cowsay
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt install -y docker-ce
@@ -30,6 +30,7 @@ tar -xf go1.13.linux-amd64.tar.gz
 sudo chown -R root:root ./go
 sudo mv go /usr/local
 GO111MODULE="on" /usr/local/go/bin/go get sigs.k8s.io/kind@v0.6.1
+echo -e "setw -g mode-keys vi\nset -g mouse on" >> ~/.tmux.conf
 EOF
 
 ## launch multipass
