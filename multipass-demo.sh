@@ -21,10 +21,10 @@ p "[.] https://kind.sigs.k8s.io/docs/design/initial/#overview"
 pe "time (kind create cluster --config ~/multipass-kind-2worker-ephemeral-config.yaml --image kindest/node:v1.16.3 --wait 5m && kubectl wait --timeout=5m --for=condition=Ready nodes --all)"
 TYPE_SPEED=20
 PROMPT_TIMEOUT=0.1
-pe "docker ps -a --format \"table {{.Names}}\\\t{{.Image}}\\\t{{.Status}}\\\t{{.Labels}}\""
+pe "docker ps -a --format \"table {{.Names}}\\\t{{.Image}}\\\t{{.Status}}\""
 
 ## view cluster status
-pe "kubectl get nodes -o wide"
+pe "kubectl get nodes"
 pe "kubectl get pods -A"
 
 ## try to deploy old deployment spec
@@ -92,7 +92,6 @@ pe "kubectl describe po example-pod"
 pe "kubectl attach -it example-pod -c debugger"
 
 echo;echo
-PROMPT_TIMEOUT=0.1
 MSG="DEMO COMPLETE!"
 COW="/usr/share/cowsay/cows/sheep.cow"
 pe "echo \$MSG | cowsay -f \$COW"
