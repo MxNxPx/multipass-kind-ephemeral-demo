@@ -1,7 +1,7 @@
 #!/bin/bash
 NAME=ubuntu-multipass
-CPU=4
-MEM=4G
+CPU=2
+MEM=3G
 DISK=10G
 
 ## unset any proxy env vars
@@ -10,7 +10,7 @@ unset PROXY HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
 ## install commands here
 cat <<'EOF' > multipass-commands.txt
 sudo apt-get update -y
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common jq git wget tmux pv cowsay
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common jq git wget pv tmux cowsay
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt install -y docker-ce
@@ -30,7 +30,8 @@ tar -xf go1.13.linux-amd64.tar.gz
 sudo chown -R root:root ./go
 sudo mv go /usr/local
 GO111MODULE="on" /usr/local/go/bin/go get sigs.k8s.io/kind@v0.6.1
-echo -e "PS1=\"$ \"" >> ~/.bashrc
+echo -e "\nfunction tmuxdemo() { \n  tmux new-session -s demo \;  split-window -v -p 15 \;  select-pane -t 0 \;  resize-pane -Z \; \n}" >> ~/.bashrc
+echo -e "\nPS1=\"$ \"" >> ~/.bashrc
 echo -e "setw -g mode-keys vi\nset -g mouse on" >> ~/.tmux.conf
 EOF
 
